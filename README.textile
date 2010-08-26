@@ -50,3 +50,11 @@ Lines to customize:
 @$config['path_conversions'] = array(@
 @		'/^category-name\/.+-([0-9]+)\./' => '\\1.'@
 @);@
+
+h2. Expiring local cached images
+
+Since this image server will mantain local copies of every requested and resized image, you'll need to expire and remove local cached images when you make changes to original images or remove them. 
+
+You can make a REST call prepending @/delete/@ to image request path. For instance, for deleting local cached image http://stc.domain.net/user/obokaman.jpg (and all the related thumbnails), you can call http://stc.domain.net/delete/user/obokaman.jpg
+
+This call will return you a JSON answer with an array called "deleted-images" containing all images that has been removed from local cache.
