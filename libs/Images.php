@@ -1,4 +1,5 @@
 <?php
+
 function make_folders( $destination )
 {
 	if ( empty ( $destination ) || !strstr($destination,"/") )

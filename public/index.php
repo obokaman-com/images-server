@@ -1,4 +1,4 @@
-<?
+<?php
 
 $root_path = realpath( dirname( __FILE__ ) ) . '/';
 
