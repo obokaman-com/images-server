@@ -1,0 +1,52 @@
+h1. Images server
+
+This set of scripts will allow you to build a light-weightimages server and dynamic thubnail generation & caching, based on a repository where the original images will remain "untouched".
+
+Actually, the Image Server allow two options for original images storage: local storage and Amazon S3 storage.
+
+Image Server integrates the official Amazon S3 library and "PHP Thumb":http://github.com/masterexploder/PHPThumb/ for image generation / resizing.
+
+h2. Quick Start
+
+h3. 1. Configure your web server.
+
+* Point a VH root to @/public/@ folder. 
+* Use @/public/index.php@ script as a dispatcher for all requests for files that doesn't exists. There's several ways to accomplish this, depending on what web server you use. (Fast implementation for Apache: @ErrorDocument 404 /index.php@)
+* Optimize your web server configuration to set a far future expire date for static files.
+
+h3. 2. Give write permissions to /public and /public/volatile folders
+
+@chmod 777 ./public@
+@chmod 777 ./public/volatile@
+
+h3. 3. Rename sample_config.php to config.php and edit it to fit your needs.
+
+Some example usages:
+
+*Case 1:*
+* Original images stored locally at /home/me/media/. 
+* Remote images will be called from http://stc.server.net/. 
+* http://stc.server.net/users/john.jpg will show (and locally cache) original image from /home/me/media/users/john.jpg
+* http://stc.server.net/users/john_a.jpg will show (and locally cache) avatar size thumbnail from /home/me/media/users/john.jpg
+
+Note that we directly translate request route to local path.
+
+Lines to customize:
+@$config['filesystem'] = 'local';@
+@$config['local_files'] = '/home/me/media/';@
+
+*Case 2*
+* Original images stored locally at /home/me/media/. 
+* Remote images will be called from http://stc.server.net/. 
+* http://stc.server.net/category-name/1312.jpg will show (and locally cache) original image from /home/me/media/1312.jpg
+* http://stc.server.net/category-name/seo-optimized-product-name_1312.jpg will show (and locally cache) original image from /home/me/media/1312.jpg
+* http://stc.server.net/category-name/seo-optimized-product-name_1312_a.jpg will show (and locally cache) avatar size thumbnail from /home/me/media/1312.jpg
+
+Note that we are adding using an unexistent /category-name/ folder, and a seo-optimized-product-name add to real image name (a numeric product id) on URL requests.
+
+Lines to customize:
+@$config['filesystem'] = 'local';@
+@$config['local_files'] = '/home/me/media/';@
+@$config['path_conversions'] = array(@
+@		'/^category-name\/.+-([0-9]+)\./' => '\\1.'@
+@);@
