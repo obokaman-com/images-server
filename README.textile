@@ -8,7 +8,7 @@ Image Server integrates the official Amazon S3 library and "PHP Thumb":http://gi
 
 h2. Quick Start
 
-h3. 1. Configure your web server.
+h3. 1. Configure your web server
 
 * Point a VH root to @/public/@ folder. 
 * Use @/public/index.php@ script as a dispatcher for all requests for files that doesn't exists. There's several ways to accomplish this, depending on what web server you use. (Fast implementation for Apache: @ErrorDocument 404 /index.php@)
@@ -19,7 +19,7 @@ h3. 2. Give write permissions to /public and /public/volatile folders
 @chmod 777 ./public@
 @chmod 777 ./public/volatile@
 
-h3. 3. Rename sample_config.php to config.php and edit it to fit your needs.
+h3. 3. Rename sample_config.php to config.php and edit it to fit your needs
 
 Some example usages:
 
