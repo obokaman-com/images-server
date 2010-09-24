@@ -51,10 +51,14 @@ Lines to customize:
 @		'/^category-name\/.+-([0-9]+)\./' => '\\1.'@
 @);@
 
-h2. Expiring local cached images
+h2. Expiring local cached images on demand
 
 Since this image server will mantain local copies of every requested and resized image, you'll need to expire and remove local cached images when you make changes to original images or remove them. 
 
 You can make a REST call prepending @/delete/@ to image request path. For instance, for deleting local cached image http://stc.domain.net/user/obokaman.jpg (and all the related thumbnails), you can call http://stc.domain.net/delete/user/obokaman.jpg
 
 This call will return you a JSON answer with an array called "deleted-images" containing all images that has been removed from local cache.
+
+h2. Automated expiring of locally cached images
+
+It will be a good practice to automatically remove those locally cached images that hasn't been accessed for a long time. You can set up a cronjob to check your local images cache and remove those images that hasn't been accessed for, let's say, last month. You can retrieve this information using the @filatime@ php function or @find %path% -atime +%num%@ command, wich would return all files in %path% that were accessed more than %num% days ago.
