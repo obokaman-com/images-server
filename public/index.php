@@ -149,8 +149,9 @@ unlink( $file['temp_location'] );
  */
 if ( file_exists( $file['final_location'] ) )
 {
-	list($width, $height, $type, $attr) = getimagesize( $file['final_location'] );
-	header( "Content-type: $type" );
+header("Content-type: {$tamaño['mime']}");
+	$image_attributes = getimagesize( $file['final_location'] );
+	header( 'Content-type: ' . $image_attributes['mime'] );
 	echo file_get_contents( $file['final_location'] );
 	exit();
 }
