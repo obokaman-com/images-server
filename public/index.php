@@ -26,7 +26,7 @@ $url_info = pathinfo( $request_uri );
 if ( preg_match( '/^\/delete\/.+/', $url_info['dirname'] ) )
 {
 	$delete_pattern = $root_path . preg_replace( '/\/delete\//', '', $url_info['dirname'] ) . '/' . $url_info['filename'] . '*';
-	$deleted_files = array();
+	$deleted_files = array( );
 	foreach ( glob( $delete_pattern ) as $file )
 	{
 		$deleted_files[$file] = unlink( $file );
@@ -50,8 +50,11 @@ $file['original_location'] = preg_replace( "/(^\/|_$file[type]$)/i", "", $file['
 $file['temp_location'] = $root_path . 'volatile/' . uniqid() . '.' . $file['extension'];
 $file['final_location'] = $root_path . preg_replace( "/(^\/)/i", "", $request_uri );
 
+// We prepare the temporal folder.
+make_folders( $file['temp_location'] );
+
 // If we've defined a set of path conversions, we apply them to original_location.
-if ( sizeof ( $config['path_conversions'] ) >= 1 )
+if ( sizeof( $config['path_conversions'] ) >= 1 )
 {
 	foreach ( $config['path_conversions'] as $pattern => $conversion )
 	{
@@ -85,7 +88,6 @@ function check404()
 	echo "Ops! You're asking for somethign that doesn't exists, buddy.";
 	exit();
 }
-
 // If Amazon S3 is used, we include the S3 library.
 if ( 'AmazonS3' == $config['filesystem'] )
 {
