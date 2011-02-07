@@ -25,6 +25,7 @@ $url_info = pathinfo( $request_uri );
 // matching the main name, to delete them.
 if ( preg_match( '/^\/delete\/.+/', $url_info['dirname'] ) )
 {
+	header( "HTTP/1.1 200 OK" );
 	$delete_pattern = $root_path . preg_replace( '/\/delete\//', '', $url_info['dirname'] ) . '/' . $url_info['filename'] . '*';
 	$deleted_files = array( );
 	foreach ( glob( $delete_pattern ) as $file )
