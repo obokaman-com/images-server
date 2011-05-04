@@ -65,7 +65,7 @@ class Images
 		}
 
 		$fileinfo = pathinfo( $to );
-		$fileinfo['extension'] = str_replace( 'jpeg', 'jpg' );
+		$fileinfo['extension'] = str_replace( 'jpeg', 'jpg', $fileinfo['extension'] );
 
 		$thumb->save( $to, $fileinfo['extension'] );
 
