@@ -154,6 +154,7 @@ if ( file_exists( $file['final_location'] ) )
 {
 	$image_attributes = getimagesize( $file['final_location'] );
 	header( 'Content-type: ' . $image_attributes['mime'] );
+	header( "HTTP/1.1 200 OK" );	
 	echo file_get_contents( $file['final_location'] );
 	exit();
 }
