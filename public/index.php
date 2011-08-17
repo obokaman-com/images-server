@@ -86,7 +86,7 @@ function check404()
 		}
 	}
 	header( "HTTP/1.0 404 Not Found" );
-	echo "Ops! You're asking for somethign that doesn't exists, buddy.";
+	echo "Ops! You're asking for something that doesn't exists, buddy.";
 	exit();
 }
 // If Amazon S3 is used, we include the S3 library.
