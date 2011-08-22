@@ -61,3 +61,9 @@ This call will return you a JSON answer with an array called "deleted-images" co
 h2. Automated expiring of locally cached images
 
 It will be a good practice to automatically remove those locally cached images that hasn't been accessed for a long time. You can set up a cronjob to check your local images cache and remove those images that hasn't been accessed for, let's say, last month. You can retrieve this information using the @filatime@ php function or @find %path% -atime +%num%@ command, wich would return all files in %path% that were accessed more than %num% days ago.
+
+For instance:
+
+@find /home/me/media/ -atime +5 | xargs rm@
+
+This will delete all files in /home/me/media/ not being accessed in last five days.
