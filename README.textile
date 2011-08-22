@@ -14,10 +14,9 @@ h3. 1. Configure your web server
 * Use @/public/index.php@ script as a dispatcher for all requests for files that doesn't exists. There's several ways to accomplish this, depending on what web server you use. (Fast implementation for Apache: @ErrorDocument 404 /index.php@)
 * Optimize your web server configuration to set a far future expire date for static files.
 
-h3. 2. Give write permissions to /public and /public/volatile folders
+h3. 2. Give write permissions to /public folder
 
 @chmod 777 ./public@
-@chmod 777 ./public/volatile@
 
 h3. 3. Rename sample_config.php to config.php and edit it to fit your needs
 
