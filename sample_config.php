@@ -7,7 +7,7 @@
  */
 $config['filesystem'] = 'local';
 
-// If we choose 'amazon' as file system, we should fill the configuration params.
+// If we choose 'AmazonS3' as file system, we should fill the configuration params.
 $config['AmazonS3']['bucket_name'] = 'bucket.name';
 $config['AmazonS3']['access_key'] = 'key';
 $config['AmazonS3']['secret_key'] = 'secret';
